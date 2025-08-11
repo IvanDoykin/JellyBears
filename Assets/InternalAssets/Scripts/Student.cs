@@ -17,5 +17,19 @@ public class Student : MonoBehaviour
         {
             Debug.LogError("Student is not ready to Unity course");
         }
+
+        float halfCounter = 0f;
+        for (int i = 0; i < sessionId; i++)
+        {
+            halfCounter += i;
+        }
+        halfCounter /= 2f;
+
+        PrintHalfCounter(halfCounter);
+    }
+
+    private void PrintHalfCounter(float halfCounter)
+    {
+        Debug.Log(halfCounter);
     }
 }

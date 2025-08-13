@@ -22,4 +22,14 @@ public class PlayerRigidbodyMovement : Movement
     {
         Move();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("On trigger");
+    }
 }

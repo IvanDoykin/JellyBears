@@ -1,10 +1,8 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Movement
 {
-    private float _speed = 10f;
-
-    private void Update()
+    protected override void Move()
     {
         if (Input.GetKey(KeyCode.A))
         {
@@ -16,5 +14,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.position += _speed * transform.forward * Time.deltaTime;
+    }
+
+    private void Update()
+    {
+        Move();
     }
 }

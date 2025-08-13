@@ -3,6 +3,7 @@
 public class PlayerRigidbodyMovement : Movement
 {
     [SerializeField] private Rigidbody _body;
+    [SerializeField] private GameObject _UI;
 
     protected override void Move()
     {
@@ -20,16 +21,18 @@ public class PlayerRigidbodyMovement : Movement
 
     private void FixedUpdate()
     {
+        if (_UI.activeSelf)
+        {
+            return;
+        }
         Move();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("On trigger");
+        if (collision.transform.name != "Plane")
+        {
+            _UI.SetActive(true);
+        }
     }
 }

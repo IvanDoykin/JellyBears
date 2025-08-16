@@ -1,10 +1,16 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerUI : MonoBehaviour
 {
-    public void RestartLevel()
+    [SerializeField] private SelectFormPanel _selectFormPanel;
+
+    public void EnableSelectFormPanel(char[] variants)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        _selectFormPanel.Enable(variants);
+    }
+
+    public void DisableSelectFormPanel()
+    {
+        _selectFormPanel.Disable();
     }
 }

@@ -26,6 +26,21 @@ public class Student : MonoBehaviour
         halfCounter /= 2f;
 
         PrintHalfCounter(halfCounter);
+
+        var movement = GetComponent<ManyObjectsMovement>();
+        if (movement != null)
+        {
+            movement.HasSpacePressed += ReactToSpace;
+        }
+        else
+        {
+            Debug.Log("No many movement.");
+        }
+    }
+
+    private void ReactToSpace()
+    {
+        Debug.Log("Space has pressed.");
     }
 
     private void PrintHalfCounter(float halfCounter)

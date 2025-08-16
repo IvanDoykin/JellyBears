@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class ForwardMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 5.0f;
     [SerializeField] private Rigidbody _body;

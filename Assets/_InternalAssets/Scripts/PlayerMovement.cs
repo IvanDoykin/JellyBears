@@ -1,23 +1,17 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerMovement : Movement
+public class PlayerMovement : MonoBehaviour
 {
-    protected override void Move()
-    {
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position += _speed * Vector3.left * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position += _speed * Vector3.right * Time.deltaTime;
-        }
+    [SerializeField] private float _speed = 5.0f;
+    [SerializeField] private Rigidbody _body;
 
-        transform.position += _speed * transform.forward * Time.deltaTime;
-    }
-
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
+    }
+
+    private void Move()
+    {
+        _body.velocity = _speed * transform.forward;
     }
 }

@@ -1,12 +1,33 @@
+using System;
 using UnityEngine;
 
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField] private SelectFormPanel _selectFormPanel;
+    public Action HasRightSelection;
 
-    public void EnableSelectFormPanel(char[] variants)
+    [SerializeField] private SelectFormPanel _selectFormPanel;
+    private PlayerTransformer _trnasformer;
+
+    private void Start()
     {
-        _selectFormPanel.Enable(variants);
+        _trnasformer = GetComponentInParent<PlayerTransformer>();
+        _selectFormPanel.VariantHasSelected += OnVariantSelected;
+    }
+
+    private void OnVariantSelected(char variant, bool isRight)
+    {
+        _trnasformer.TransformTo(variant);
+
+        if (isRight)
+        {
+            HasRightSelection?.Invoke();
+            DisableSelectFormPanel();
+        }
+    }
+
+    public void EnableSelectFormPanel(char[] variants, char rightVariant)
+    {
+        _selectFormPanel.Enable(variants, rightVariant);
     }
 
     public void DisableSelectFormPanel()

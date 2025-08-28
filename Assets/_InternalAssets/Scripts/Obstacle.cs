@@ -3,23 +3,35 @@
 public class Obstacle : MonoBehaviour
 {
     [SerializeField] private char[] _variants;
-    [SerializeField] private Mesh[] _playerVariants;
 
     private void OnTriggerEnter(Collider other)
     {
         PlayerUI player = other.GetComponentInChildren<PlayerUI>();
         if (player != null)
         {
-            player.EnableSelectFormPanel(_variants);
+            player.EnableSelectFormPanel(_variants, char.Parse(transform.parent.name));
+            player.HasRightSelection += DisableCollision;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        PlayerUI playerUI = other.GetComponentInChildren<PlayerUI>();
-        if (playerUI != null)
+        PlayerTransformer playerTransformer = other.GetComponent<PlayerTransformer>();
+        if (playerTransformer != null)
         {
-            playerUI.DisableSelectFormPanel();
+            playerTransformer.TransformToDefault();
+        }
+    }
+
+    private void DisableCollision()
+    {
+        Collider[] colliders = GetComponentsInChildren<Collider>();
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (!colliders[i].isTrigger)
+            {
+                colliders[i].enabled = false;
+            }
         }
     }
 }

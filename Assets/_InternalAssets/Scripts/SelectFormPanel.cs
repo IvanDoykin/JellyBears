@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SelectFormPanel : MonoBehaviour
 {
-    public event Action<char> VariantHasSelected;
+    public event Action<char, bool> VariantHasSelected;
     [SerializeField] private FormVariant[] _formVariants;
 
     private void Start()
@@ -14,13 +14,13 @@ public class SelectFormPanel : MonoBehaviour
         }
     }
 
-    private void OnVariantSelected(char letter)
+    private void OnVariantSelected(char letter, bool isRight)
     {
         Debug.Log(letter);
-        VariantHasSelected?.Invoke(letter);
+        VariantHasSelected?.Invoke(letter, isRight);
     }
 
-    public void Enable(char[] variants)
+    public void Enable(char[] variants, char rightVariant)
     {
         if (variants.Length > _formVariants.Length)
         {
@@ -30,7 +30,7 @@ public class SelectFormPanel : MonoBehaviour
 
         for (int i = 0; i < variants.Length; i++)
         {
-            _formVariants[i].Enable(variants[i]);
+            _formVariants[i].Enable(variants[i], variants[i] == rightVariant);
         }
     }
 

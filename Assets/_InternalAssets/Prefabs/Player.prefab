@@ -5587,7 +5587,7 @@ GameObject:
   - component: {fileID: 2509775277150763400}
   - component: {fileID: 5787642380785450134}
   m_Layer: 0
-  m_Name: GameOverPanel
+  m_Name: FinishUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5628,6 +5628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091872f7578a29f49956d55103542473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _title: {fileID: 7427709436597959576}
 --- !u!1 &3820601148702672497
 GameObject:
   m_ObjectHideFlags: 0
@@ -11473,9 +11474,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2509775277150763400}
   - {fileID: 4085722396680566075}
   - {fileID: 7090527429094959447}
+  - {fileID: 2509775277150763400}
   m_Father: {fileID: 2430968019690666993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -11558,6 +11559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb34f719d2af0534e9b601953447d7e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _finishUI: {fileID: 5787642380785450134}
   _selectFormPanel: {fileID: 3394845942416015679}
 --- !u!1 &7554212144376850276
 GameObject:

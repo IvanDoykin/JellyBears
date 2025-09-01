@@ -8,6 +8,9 @@ public class Level : MonoBehaviour
     [SerializeField] private Transform[] _players;
     [SerializeField] private ProgressPanel _progressPanel;
 
+    private bool _isWin = true;
+    private bool _isFinish = false;
+
     private void Awake()
     {
         Time.timeScale = 0f;
@@ -21,12 +24,28 @@ public class Level : MonoBehaviour
 
     private void Update()
     {
-        float[] progress = new float[_players.Length];
-        for (int i = 0; i <  _players.Length; i++)
+        if (!_isFinish)
         {
-            progress[i] = Mathf.Abs(_players[i].position.z - _startPoint.position.z) / Mathf.Abs(_finishPoint.position.z - _startPoint.position.z);
-        }
+            float[] progress = new float[_players.Length];
+            for (int i = 0; i < _players.Length; i++)
+            {
+                progress[i] = Mathf.Abs(_players[i].position.z - _startPoint.position.z) / Mathf.Abs(_finishPoint.position.z - _startPoint.position.z);
+                if (progress[i] > 0.99f)
+                {
+                    PlayerUI ui = _players[i].GetComponentInChildren<PlayerUI>();
+                    if (ui != null)
+                    {
+                        ui.Finish(_isWin);
+                        _isFinish = true;
+                    }
+                    else
+                    {
+                        _isWin = false;
+                    }
+                }
+            }
 
-        _progressPanel.SetPoints(progress);
+            _progressPanel.SetPoints(progress);
+        }
     }
 }

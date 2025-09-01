@@ -5,6 +5,7 @@ public class PlayerUI : MonoBehaviour
 {
     public Action HasRightSelection;
 
+    [SerializeField] private FinishUI _finishUI;
     [SerializeField] private SelectFormPanel _selectFormPanel;
     private PlayerTransformer _trnasformer;
 
@@ -23,6 +24,11 @@ public class PlayerUI : MonoBehaviour
             HasRightSelection?.Invoke();
             DisableSelectFormPanel();
         }
+    }
+
+    public void Finish(bool isWin)
+    {
+        _finishUI.Finish(isWin);
     }
 
     public void EnableSelectFormPanel(char[] variants, char rightVariant)

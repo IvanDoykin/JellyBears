@@ -13,13 +13,17 @@ public class Level : MonoBehaviour
 
     private void Awake()
     {
-        Time.timeScale = 0f;
         StartSession();
     }
 
     public void StartSession()
     {
         Time.timeScale = 1f;
+    }
+
+    public void StopSession()
+    {
+        Time.timeScale = 0f;
     }
 
     private void Update()
@@ -37,6 +41,7 @@ public class Level : MonoBehaviour
                     {
                         ui.Finish(_isWin);
                         _isFinish = true;
+                        StopSession();
                     }
                     else
                     {

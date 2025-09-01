@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerTransformer : MonoBehaviour
 {
+    [SerializeField] private AudioSource _sfx;
     [SerializeField] private GameObject _defaultView;
     [SerializeField] private Transform _place;
     [SerializeField] private ParticleSystem[] _particles;
@@ -27,6 +28,7 @@ public class PlayerTransformer : MonoBehaviour
                 {
                     _particles[j].Play();
                 }
+                _sfx.Play();
             }
         }
     }
@@ -46,5 +48,6 @@ public class PlayerTransformer : MonoBehaviour
         {
             _particles[j].Play();
         }
+        _sfx.Play();
     }
 }

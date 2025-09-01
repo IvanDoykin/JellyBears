@@ -9,8 +9,15 @@ public class Obstacle : MonoBehaviour
         PlayerUI player = other.GetComponentInChildren<PlayerUI>();
         if (player != null)
         {
-            player.EnableSelectFormPanel(_variants, char.Parse(transform.parent.name));
             player.HasRightSelection += DisableCollision;
+            player.EnableSelectFormPanel(_variants, char.Parse(transform.parent.name));
+        }
+
+        AISelector ai = other.GetComponentInChildren<AISelector>();
+        if (ai != null)
+        {
+            ai.HasRightSelection += DisableCollision;
+            ai.Enable(_variants, char.Parse(transform.parent.name));
         }
     }
 

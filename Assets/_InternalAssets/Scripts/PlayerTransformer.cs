@@ -13,9 +13,9 @@ public class PlayerTransformer : MonoBehaviour
 
     public void PlayEffect()
     {
-        for (int j = 0; j < _transformInfo.Length; j++)
+        for (int i = 0; i < _particles.Length; i++)
         {
-            _particles[j].Play();
+            _particles[i].Play();
         }
     }
 
@@ -46,9 +46,9 @@ public class PlayerTransformer : MonoBehaviour
         }
 
         _defaultView.SetActive(true);
+        PlayEffect();
         Destroy(_transformedView);
         _isTransformed = false;
-        PlayEffect();
         _sfx.Play();
     }
 }

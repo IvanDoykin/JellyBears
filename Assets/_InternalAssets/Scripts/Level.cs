@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Level : MonoBehaviour
 {
@@ -43,8 +44,10 @@ public class Level : MonoBehaviour
                         _isFinish = true;
                         StopSession();
                     }
-                    else
+                    else if (_players[i].gameObject.activeSelf)
                     {
+                        _players[i].GetComponent<PlayerTransformer>().PlayEffect();
+                        StartCoroutine(DisableInTime(_players[i].gameObject, 0.1f));
                         _isWin = false;
                     }
                 }
@@ -52,5 +55,11 @@ public class Level : MonoBehaviour
 
             _progressPanel.SetPoints(progress);
         }
+    }
+
+    private IEnumerator DisableInTime(GameObject objectToDisable, float time)
+    {
+        yield return new WaitForSeconds(time);
+        objectToDisable.SetActive(false);
     }
 }

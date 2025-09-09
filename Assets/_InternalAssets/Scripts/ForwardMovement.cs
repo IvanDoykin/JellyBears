@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class ForwardMovement : MonoBehaviour
 {
-    [SerializeField] private float _startSpeed = 10.0f;
+    [SerializeField] private float _speed = 10.0f;
+    [SerializeField] private float _maxSpeed = 20f;
+    [SerializeField] private float _acceleration = 0.5f;
     [SerializeField] private float _pushForce = 10f;
     [SerializeField] private Rigidbody _body;
 
@@ -49,9 +51,13 @@ public class ForwardMovement : MonoBehaviour
             return;
         }
 
-        if (_currentSpeed < _startSpeed)
+        if (_currentSpeed < _speed)
         {
-            _currentSpeed += _startSpeed * Time.deltaTime;
+            _currentSpeed += _speed * Time.deltaTime;
+        }
+        else
+        {
+            _speed = Mathf.Clamp(_speed + _acceleration * Time.fixedDeltaTime, _speed, _maxSpeed);
         }
 
         _body.velocity = _currentSpeed * transform.forward;

@@ -11,6 +11,14 @@ public class PlayerTransformer : MonoBehaviour
     private GameObject _transformedView;
     private bool _isTransformed = false;
 
+    public void PlayEffect()
+    {
+        for (int j = 0; j < _transformInfo.Length; j++)
+        {
+            _particles[j].Play();
+        }
+    }
+
     public void TransformTo(char letter)
     {
         if (_isTransformed)
@@ -24,10 +32,7 @@ public class PlayerTransformer : MonoBehaviour
                 _defaultView.SetActive(false);
                 _transformedView = Instantiate(_transformInfo[i].TransformedObject, _place);
                 _isTransformed = true;
-                for (int j = 0; j < _transformInfo.Length; j++)
-                {
-                    _particles[j].Play();
-                }
+                PlayEffect();
                 _sfx.Play();
             }
         }
@@ -37,17 +42,13 @@ public class PlayerTransformer : MonoBehaviour
     {
         if (!_isTransformed)
         {
-            Debug.LogError("Transform to default error.");
             return;
         }
 
         _defaultView.SetActive(true);
         Destroy(_transformedView);
         _isTransformed = false;
-        for (int j = 0; j < _transformInfo.Length; j++)
-        {
-            _particles[j].Play();
-        }
+        PlayEffect();
         _sfx.Play();
     }
 }

@@ -1,11 +1,8 @@
-﻿using RuStore.BillingClient;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    private static bool _initialized = false;
-
     [SerializeField] private Transform _startPoint;
     [SerializeField] private Transform _finishPoint;
 
@@ -17,11 +14,6 @@ public class Level : MonoBehaviour
 
     private void Awake()
     {
-        if (!_initialized)
-        {
-            _initialized = true;
-            RuStoreBillingClient.Instance.Init();
-        }
         StartSession();
     }
 
